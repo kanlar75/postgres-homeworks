@@ -3,6 +3,7 @@ import csv
 
 import psycopg2
 
+# файлы с данными
 file_name1 = '../homework-1/north_data/customers_data.csv'
 file_name2 = '../homework-1/north_data/employees_data.csv'
 file_name3 = '../homework-1/north_data/orders_data.csv'
@@ -16,7 +17,7 @@ conn = psycopg2.connect(
 try:
     with conn:
         with conn.cursor() as cur:
-
+            # Заполняем таблицу customers_data из customers_data.csv
             with open(file_name1) as csvfile:
                 readers = csv.DictReader(csvfile)
                 for reader in readers:
@@ -24,7 +25,7 @@ try:
                                 "%s)",
                                 (reader['customer_id'], reader['company_name'],
                                  reader['contact_name']))
-    
+            # Заполняем таблицу employees_data из employees_data.csv
             with open(file_name2) as csvfile:
                 readers = csv.DictReader(csvfile)
                 for reader in readers:
@@ -33,7 +34,7 @@ try:
                                 (reader['employee_id'], reader["first_name"],
                                  reader['last_name'], reader['title'], reader[
                                      'birth_date'], reader['notes']))
-    
+            # Заполняем таблицу orders_data из orders_data.csv
             with open(file_name3) as csvfile:
                 readers = csv.DictReader(csvfile)
                 for reader in readers:
