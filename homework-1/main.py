@@ -7,7 +7,7 @@ import psycopg2
 file_name1 = '../homework-1/north_data/customers_data.csv'
 file_name2 = '../homework-1/north_data/employees_data.csv'
 file_name3 = '../homework-1/north_data/orders_data.csv'
-
+# подключаемся к базе данных
 conn = psycopg2.connect(
     host="localhost",
     database="north",
@@ -16,6 +16,8 @@ conn = psycopg2.connect(
 )
 try:
     with conn:
+        # используем контекстный менеджер объекта cursor для выполнения
+        # запросов
         with conn.cursor() as cur:
             # Заполняем таблицу customers_data из customers_data.csv
             with open(file_name1) as csvfile:
